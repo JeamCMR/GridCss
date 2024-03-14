@@ -1,15 +1,234 @@
-*,::before,::after{
-    padding:0;
-    margin:0;
-    box-sizing:border-box;
-  }
+*,
+::before,
+::after {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
 
-  html{
-    font-size:62.5%;
-  }
+/*tipo de letra, tamaños y colores*/
+html {
+    font-size: 62.5%;
+}
 
-  body{
-    font-family:Baskervville,serif;
-    color:linen;
-    background-color:rgb(20,30,40);
-  }
+body {
+    font-family: Baskervville, serif;
+    color: linen;
+    background-color: rgb(20, 30, 40);
+}
+
+h1 {
+    font-family: Anton, sans-serif;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: Raleway, sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: linen;
+}
+
+
+
+/*Css Grid reglas*/
+
+main {
+    display: grid;
+    /*Propiedad especial para estilizar con grid-diseño de tres columnas*/
+    grid-template-columns: minmax(2rem, 1fr) minmax(min-content, 94rem) minmax(2rem, 1fr);
+    /*Se usa la funcion minmax para hacer la tres columnas adaptables a cualquier dispositivo, esta tiene 2 argumentos un minimo y un maximo*/
+    /*la columna del medio tiene un valor de 94rem y la primera y la ultima son 1 fracion del espacio restante del contenedor*/
+    row-gap: 3rem;
+    /*agregar espacio entre filas en el diseño Grid*/
+}
+
+img {
+    width: 100%;
+    object-fit: cover;
+    /*Esta propiedad le indica al navegador como colocar la imagen dentro del contendor, con el valor cover llena todo 
+    el contenedor y recorta la imagen para que no cambie la realacion de aspecto*/
+}
+
+hr {
+    margin: 1.5rem 0;
+    border: 1px solid rgba(120, 120, 120, 0.6);
+}
+
+.heading {
+    grid-column: 2 / 3;
+    /*Propiedad segundaria de grid indica al elemento del grid que la linea debe comenzar y terminar  */
+    display: grid;
+    /*Se puede tener un grid dentro de otro grid para tener mas control*/
+    grid-template-columns: repeat(2, 1fr);
+    /*La propiedad repeat es muy util para el diseño grid ya que nos permite crear varias columans 
+    con el mismo tamaño, con esto ahoramos codigo*/
+    row-gap: 1.5rem;
+}
+
+.text {
+    grid-column: 2 / 3;
+    /*Se le agrega la propieda al selector de clase texto*/
+    font-size: 1.8rem;
+    letter-spacing: 0.6px;
+    column-width: 25rem;
+    /*Se puede orgizar de forma cuadricular sin usar grid el texto con esta propiedad*/
+    text-align: center;
+}
+
+.hero {
+    grid-column: 1 / -1;
+    /*Si no estamos seguro de cuantas columnas tedra la cuadriculas podemos colocar -1 al final del propiedad*/
+    position: relative;
+}
+
+.hero-title {
+    text-align: center;
+    color: orangered;
+    font-size: 8rem;
+}
+
+.hero-subtitle {
+    font-size: 2.4rem;
+    color: orangered;
+    text-align: center;
+}
+
+.author {
+    font-size: 2rem;
+    font-family: "Raleway", sans-serif;
+}
+
+.author-name a:hover {
+    background-color: #306203;
+}
+
+.publish-date {
+    color: rgba(255, 2555, 255, 0.5);
+}
+
+.social-icons {
+    display: grid;
+    font-size: 3rem;
+    grid-template-columns: repeat(5, 1fr);
+    /*Le indica al grip  de forma manual que distrubuya los elementos en 5 columnas de igual tamaño*/
+    grid-auto-flow: column;
+    /*Con esta propiedad organiza y  distribuye los elmentos en forma de columna, esta propieda espera 2 valores, column o row*/
+    grid-auto-columns: 1fr;
+    /*Si se agrega una nueva columna el algoritmo por defecto le dara un ancho de auto, y esto afectara a las demas columnas
+    con esta propieda indicamos que las nuevas columnas tendra un ancho igual a todas la columnas ya existentes*/
+    align-items: center;
+}
+
+.first-paragraph::first-letter {
+    font-size: 6rem;
+    color: orangered;
+    float: left;
+    margin: 1rem;
+}
+
+.quote {
+    color: #00beef;
+    font-size: 2.4rem;
+    text-align: center;
+    font-family: "Raleway", sans-serif;
+}
+
+/*Se agrega las comillas a la cita con pseudo-selectores*/
+.quote::before {
+    content: '" ';
+
+}
+
+.quote::after {
+    content: ' "';
+}
+
+/*Tercer section*/
+.text-with-images {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    column-gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.lists {
+    list-style-type: none;
+    margin-top: 2rem;
+}
+
+.lists li {
+    margin-bottom: 1.5rem;
+}
+
+.list-title,
+.list-subtitle {
+    color: #00beef;
+}
+
+.image-wrapper {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    grid-template-rows: repeat(3, min-content);
+    gap: 2rem;
+    /*Es la abreviacion de column-gap y row-gap*/
+    place-items: center;
+    /*se puede usar para establecer los valores align-items y justify-items al mismo tiempo*/
+}
+
+.image-1,
+.image-3 {
+    grid-column: 1 / -1;
+    /*Esto permitirá que la primera y la tercera imagen abarquen todo el ancho de la cuadrícula*/
+}
+
+/*Media querys*/
+
+@media only screen and (max-width: 720px) {
+    .image-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media only screen and (max-width: 600px) {
+    .text-with-images {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+
+    .hero-title {
+        font-size: 6rem;
+    }
+
+    .hero-subtitle,
+    .author,
+    .quote,
+    .list-title {
+        font-size: 1.8rem;
+    }
+
+    .social-icons {
+        font-size: 2rem;
+    }
+
+    .text {
+        font-size: 1.6rem
+    }
+
+}
+
+@media only screen and (max-width: 420px) {
+
+    .hero-title {
+        font-size: 4.5rem;
+    }
+
+}
